@@ -62,8 +62,11 @@ namespace GuaniuSearchBar
             SetParent(Handle, hTaskBar);
             MoveWindow(Handle, startButtonWidth, 0, this.Width, this.Height, true);
             pbLeftIcon.Tag = "百度";
+            Search.GetBaiduHotKeywords();
+            Search.GetDefaultExplorer();
+
         }
-        
+
         /// <summary>
         /// GetClient Rect.
         /// </summary>
@@ -187,6 +190,7 @@ namespace GuaniuSearchBar
         {
             ShowPopupWnd();  
         }
+
         /// <summary>
         /// Show popup window
         /// </summary>
@@ -229,7 +233,7 @@ namespace GuaniuSearchBar
                     tbSearch.Focus();
                     keywordWnd.Deactivate += (_sender, _e) => { keywordWnd.Close(); };
                 }
-                // ca;ll keyword changed event
+                // call keyword changed event
                 keywordWnd.KeywordUpdated_Handler();
             }
 
@@ -335,6 +339,19 @@ namespace GuaniuSearchBar
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
             ShowPopupWnd();
+        }
+
+        private void 意见反馈ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Advices advices = new Advices();
+            
+            advices.Show();
+        }
+
+        private void 基础设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BasicSettings bsWnd = new BasicSettings();
+            bsWnd.Show();
         }
     }
 }

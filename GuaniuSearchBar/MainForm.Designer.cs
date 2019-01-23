@@ -38,6 +38,11 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btnSearch = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.在桌面显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.基础设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.检查更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.在线帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.意见反馈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).BeginInit();
@@ -67,14 +72,19 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.在桌面显示ToolStripMenuItem,
+            this.基础设置ToolStripMenuItem,
+            this.检查更新ToolStripMenuItem,
+            this.在线帮助ToolStripMenuItem,
+            this.意见反馈ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 158);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -137,6 +147,39 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbLeft_Click);
             // 
+            // 在桌面显示ToolStripMenuItem
+            // 
+            this.在桌面显示ToolStripMenuItem.Name = "在桌面显示ToolStripMenuItem";
+            this.在桌面显示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.在桌面显示ToolStripMenuItem.Text = "在桌面显示";
+            // 
+            // 基础设置ToolStripMenuItem
+            // 
+            this.基础设置ToolStripMenuItem.Name = "基础设置ToolStripMenuItem";
+            this.基础设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.基础设置ToolStripMenuItem.Text = "基础设置";
+            this.基础设置ToolStripMenuItem.Click += new System.EventHandler(this.基础设置ToolStripMenuItem_Click);
+            // 
+            // 检查更新ToolStripMenuItem
+            // 
+            this.检查更新ToolStripMenuItem.Name = "检查更新ToolStripMenuItem";
+            this.检查更新ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.检查更新ToolStripMenuItem.Text = "检查更新";
+            // 
+            // 在线帮助ToolStripMenuItem
+            // 
+            this.在线帮助ToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.在线帮助ToolStripMenuItem.Name = "在线帮助ToolStripMenuItem";
+            this.在线帮助ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.在线帮助ToolStripMenuItem.Text = "在线帮助";
+            // 
+            // 意见反馈ToolStripMenuItem
+            // 
+            this.意见反馈ToolStripMenuItem.Name = "意见反馈ToolStripMenuItem";
+            this.意见反馈ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.意见反馈ToolStripMenuItem.Text = "意见反馈";
+            this.意见反馈ToolStripMenuItem.Click += new System.EventHandler(this.意见反馈ToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -176,6 +219,11 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox btnSearch;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem 在桌面显示ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 基础设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 检查更新ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 在线帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 意见反馈ToolStripMenuItem;
     }
 }
 

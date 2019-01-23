@@ -58,7 +58,7 @@ namespace GuaniuSearchBar
                 linkLabels[i].Left = 0;
                 linkLabels[i].Size = label1.Size;
                 linkLabels[i].Top = label1.Top + i * label1.Height;
-                linkLabels[i].Text = i.ToString();
+                linkLabels[i].Text =string.Empty;
                 linkLabels[i].MouseEnter += Label_MouseEnter;
                 linkLabels[i].MouseLeave += Label_MouseLeave;
 
@@ -69,7 +69,7 @@ namespace GuaniuSearchBar
                     Label __sender = _sender as Label;
                     if (__sender.Tag != null)
                     {
-                        Process.Start(__sender.Tag.ToString() + __sender.Text);
+                        Process.Start( __sender.Tag.ToString() );
                     }
                 };
 
@@ -119,7 +119,9 @@ namespace GuaniuSearchBar
 
             }
 
-            GetNews();
+
+            Search.GetBaiduHotKeywords(linkLabels);
+     
         }
 
         private void Label_MouseLeave(object sender, EventArgs e)
@@ -135,33 +137,7 @@ namespace GuaniuSearchBar
 
     
 
-        private void GetNews()
-        {
-            Action UpdateNews = () =>
-            {
-                try
-                {
-                    string s = HttpHelper.HttpGet("http://127.0.0.1:8000/main/get_dummy_data/");
-                    JArray jsonResult = (JArray)JsonConvert.DeserializeObject(s);
-
-                    for (int i = 0; i < jsonResult.Count; i++)
-                    {
-                        linkLabels[i].Invoke(new MethodInvoker(() =>
-                        {
-                            linkLabels[i].Text = jsonResult[i]["title"].ToString();
-                            linkLabels[i].Tag = jsonResult[i]["url"];
-                        }));
-                    }
-                }
-                catch (Exception e)
-                {
-                }
-            };
-
-
-            new Thread(new ThreadStart(UpdateNews)).Start();
-
-        }
+   
 
         private void PopupMainWnd_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -176,6 +152,21 @@ namespace GuaniuSearchBar
                 Close();
 
             }
+        }
+
+        private void ChangeHotKeywords()
+        {
+
+            Search.GetBaiduHotKeywords(linkLabels,true);
+        }
+        private void label4_Click(object sender, EventArgs e)
+        {
+            ChangeHotKeywords();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            ChangeHotKeywords();
         }
     }
 }

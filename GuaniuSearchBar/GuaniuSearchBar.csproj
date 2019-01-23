@@ -49,6 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Advices.Designer.cs">
+      <DependentUpon>Advices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BasicSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicSettings.Designer.cs">
+      <DependentUpon>BasicSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +89,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.cs" />
+    <EmbeddedResource Include="Advices.resx">
+      <DependentUpon>Advices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicSettings.resx">
+      <DependentUpon>BasicSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

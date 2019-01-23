@@ -36,9 +36,7 @@ namespace GuaniuSearchBar
 
         private void Form2_Deactivate(object sender, EventArgs e)
         {
-
-        
-
+            
 
         }
 
