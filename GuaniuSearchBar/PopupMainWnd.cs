@@ -16,7 +16,7 @@ using System.Diagnostics;
 
 namespace GuaniuSearchBar
 {
-    public partial class PopupMainWnd : Form
+    public partial class PopupMainWnd : System.Windows.Forms.Form
     {
         Label[] linkLabels;
         PictureBox[] pictureBoxes;

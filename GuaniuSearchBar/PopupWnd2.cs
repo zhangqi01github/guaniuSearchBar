@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace GuaniuSearchBar
 {
 
-    public partial class LeftPopupWnd : Form
+    public partial class LeftPopupWnd : System.Windows.Forms.Form
     {
         const int ITEM_COUNT = 3;
 

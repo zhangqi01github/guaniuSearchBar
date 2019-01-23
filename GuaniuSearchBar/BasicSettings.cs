@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GuaniuSearchBar
 {
-    public partial class BasicSettings : Form
+    public partial class BasicSettings : System.Windows.Forms.Form
     {
         public BasicSettings()
         {

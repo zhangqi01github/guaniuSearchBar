@@ -16,17 +16,17 @@ using System.Diagnostics;
 
 namespace GuaniuSearchBar
 {
-    public partial class PopupKeywordWnd : Form
+    public partial class PopupKeywordWnd : System.Windows.Forms.Form
     {
         Label[] linkLabels;
         PictureBox[] pictureBoxes;
         Label[] siteNameLabels;
         TextBox tbSearch;
         int startTopPosition;
-        MainForm mainForm;
+        Form mainForm;
 
 
-        public PopupKeywordWnd(TextBox tbSearch, MainForm mainForm)
+        public PopupKeywordWnd(TextBox tbSearch, Form mainForm)
         {
             InitializeComponent();
             this.tbSearch = tbSearch;
@@ -86,7 +86,7 @@ namespace GuaniuSearchBar
                 {
                     Label __sender = _sender as Label;
                    
-                    mainForm.CallSearchEngine(__sender.Text);
+                    ((dynamic)mainForm).CallSearchEngine(__sender.Text);
                     
                 };
 

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace GuaniuSearchBar
 {
-    public partial class Advices : System.Windows.Forms.Form
+    public partial class UpdateForm : Form
     {
-        public Advices()
+        public UpdateForm()
         {
             InitializeComponent();
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

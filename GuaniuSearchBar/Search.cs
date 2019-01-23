@@ -16,7 +16,7 @@ namespace GuaniuSearchBar
     {
         static int startIndex = 0;
         static string[] hotKeywords=new string[50];
-
+        static Label[] labels;
         static string defaultExplorer;
 
 
@@ -49,6 +49,12 @@ namespace GuaniuSearchBar
                         // var data = jsonResults.SelectToken("data");
                         hotKeywords = jsonResults.SelectToken("data")
                                                                     .Select(ss => { return ss["keyword"].ToString(); }).ToArray();
+
+                        
+                        if (labels!=null)
+                        {
+                            GetBaiduHotKeywords(labels);
+                        }
                         Thread.Sleep(10000);//10s
                     }
 
@@ -66,7 +72,7 @@ namespace GuaniuSearchBar
 
         public static void GetBaiduHotKeywords(Label[] linkLabels, bool changeKeywordFlag = false)
         {
-
+            labels = linkLabels;
             Action UpdateNews = () =>
             {
                 try

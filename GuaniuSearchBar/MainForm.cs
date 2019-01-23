@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace GuaniuSearchBar
 {
-    public partial class MainForm : Form
+    public partial class MainForm : System.Windows.Forms.Form
     {
         public MainForm()
         {
@@ -42,7 +42,13 @@ namespace GuaniuSearchBar
             public string szWindowName;
             public string szClassName;
         }
+        enum DisplayMode
+        {
+            Desktop,
+            TaskBar
+        }
 
+        DisplayMode displayMode= DisplayMode.Desktop;
         // handle of TaskBar
         IntPtr hTaskBar = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "Shell_TrayWnd", null);
         int startButtonWidth;
@@ -50,21 +56,84 @@ namespace GuaniuSearchBar
         int rebarOriginalWidth = 0;
 
         int trayNotifyOriginalWidth = 0;
+        Point desktopModeLocation=new Point(200,100);
 
         PopupMainWnd popupWnd;
         PopupKeywordWnd keywordWnd;
         LeftPopupWnd leftPopupWnd;
 
+
+        #region 无边框拖动效果
+        bool movingWindowFlag = false;
+        private Point mPoint;
+        private Point oldLocation;
+
+        /// <summary>
+        /// 鼠标移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pbLeftIcon_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && displayMode == DisplayMode.Desktop && movingWindowFlag)
+            {
+                this.Location = new Point(this.Location.X + e.X - mPoint.X, this.Location.Y + e.Y - mPoint.Y);
+                if (leftPopupWnd != null && leftPopupWnd.Visible)
+                {
+                    leftPopupWnd.Location = new Point(leftPopupWnd.Location.X + e.X - mPoint.X, leftPopupWnd.Location.Y + e.Y - mPoint.Y);
+  
+                }
+                if (popupWnd != null && popupWnd.Visible)
+                {
+                    popupWnd.Location = new Point(popupWnd.Location.X + e.X - mPoint.X, popupWnd.Location.Y + e.Y - mPoint.Y);
+                }
+            }
+        }
+
+
+        private void pbLeft_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (displayMode==DisplayMode.Desktop)
+            {
+                oldLocation = this.Location;
+                mPoint = new Point(e.X, e.Y);
+                movingWindowFlag = true;
+            }
+          
+        }
+        #endregion
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            MoveTaskBarButtons(this.Width);
             // Move this window to taskbar.
-            SetParent(Handle, hTaskBar);
-            MoveWindow(Handle, startButtonWidth, 0, this.Width, this.Height, true);
+            SetDisplayMode();
             pbLeftIcon.Tag = "百度";
             Search.GetBaiduHotKeywords();
             Search.GetDefaultExplorer();
 
+        }
+
+        private void SetDisplayMode()
+        {
+            if (displayMode == DisplayMode.TaskBar)
+            {
+                MoveTaskBarButtons(this.Width);
+                SetParent(Handle, hTaskBar);
+                MoveWindow(Handle, startButtonWidth, 2, this.Width, this.Height, true);
+               
+                在桌面显示ToolStripMenuItem.Text = "在桌面显示";
+                TransparencyKey = Color.Empty;
+            }
+            else
+            {
+                MoveTaskBarButtons(0);
+                SetParent(Handle, IntPtr.Zero);
+                //MoveWindow(Handle, startButtonWidth, 0, this.Width, this.Height, true);
+                在桌面显示ToolStripMenuItem.Text = "在任务栏显示";
+                this.TransparencyKey = Color.Black;
+                MoveWindow(Handle, desktopModeLocation.X, desktopModeLocation.Y, this.Width, this.Height, true);
+            }
+           
         }
 
         /// <summary>
@@ -272,6 +341,11 @@ namespace GuaniuSearchBar
 
         private void pbLeft_Click(object sender, MouseEventArgs e)
         {
+            if( this.Location!= oldLocation && displayMode==DisplayMode.Desktop)
+            {
+                return;
+            }
+
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStrip1.Show(e.Location.X + Location.X, e.Location.Y + Location.Y);
@@ -292,6 +366,10 @@ namespace GuaniuSearchBar
                         pbArrow.Image = Properties.Resources.less_btn;
                     };
                     pbArrow.Image = Properties.Resources.more_btn;
+                }
+                else
+                {
+                    leftPopupWnd.Close();
                 }
             }
         }
@@ -352,6 +430,44 @@ namespace GuaniuSearchBar
         {
             BasicSettings bsWnd = new BasicSettings();
             bsWnd.Show();
+        }
+
+        private void 在桌面显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (displayMode==DisplayMode.TaskBar)
+            {
+                displayMode = DisplayMode.Desktop;
+            }
+            else
+            {
+                displayMode = DisplayMode.TaskBar;
+            }
+            SetDisplayMode();
+         
+
+        }
+
+        private void 在线帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Process.Start("");
+        }
+
+        private void pbLeftIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+   
+            movingWindowFlag = false;
+        }
+
+        private void pbLeftIcon_Click(object sender, EventArgs e)
+        {
+    
+        }
+
+        private void 检查更新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateForm upForm = new UpdateForm();
+            upForm.Show();
+               
         }
     }
 }
