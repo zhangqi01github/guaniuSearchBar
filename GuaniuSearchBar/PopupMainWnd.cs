@@ -59,6 +59,7 @@ namespace GuaniuSearchBar
                 linkLabels[i].Size = label1.Size;
                 linkLabels[i].Top = label1.Top + i * label1.Height;
                 linkLabels[i].Text =string.Empty;
+                linkLabels[i].TextAlign = ContentAlignment.MiddleLeft;
                 linkLabels[i].MouseEnter += Label_MouseEnter;
                 linkLabels[i].MouseLeave += Label_MouseLeave;
 

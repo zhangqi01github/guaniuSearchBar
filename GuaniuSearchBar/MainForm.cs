@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,13 +57,58 @@ namespace GuaniuSearchBar
         int rebarOriginalWidth = 0;
 
         int trayNotifyOriginalWidth = 0;
-        Point desktopModeLocation=new Point(200,100);
+        Point desktopModeLocation=new Point(Screen.PrimaryScreen.WorkingArea.Width/3,300);
 
         PopupMainWnd popupWnd;
         PopupKeywordWnd keywordWnd;
         LeftPopupWnd leftPopupWnd;
 
+        #region 接收来自软件更新器的消息以关闭程序
+        const int WM_COPYDATA = 0x004A;
+        public struct COPYDATASTRUCT
 
+        {
+
+            public IntPtr dwData;
+
+            public int cbData;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+
+            public string lpData;
+
+        }
+
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_COPYDATA:
+                    COPYDATASTRUCT cds = new COPYDATASTRUCT();
+
+                    Type t = cds.GetType();
+
+                    cds = (COPYDATASTRUCT)m.GetLParam(t);
+
+                    string strResult = cds.lpData;
+
+                    string strType = cds.dwData.ToString();
+                    if (strResult == "GN_EXIT")
+                    {
+                        Environment.Exit(0);
+                    }
+                    break;
+
+                default:
+
+                    base.WndProc(ref m);
+
+
+                    break;
+            }
+        }
+        #endregion
         #region 无边框拖动效果
         bool movingWindowFlag = false;
         private Point mPoint;
@@ -240,6 +286,7 @@ namespace GuaniuSearchBar
  
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             var hStartBtn = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "Start", null);
@@ -251,7 +298,11 @@ namespace GuaniuSearchBar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            MoveTaskBarButtons(this.Width);
+            if (displayMode == DisplayMode.TaskBar)
+            {
+                MoveTaskBarButtons(this.Width);
+            }
+           // this.TopMost = true;
         }
 
 
@@ -280,7 +331,15 @@ namespace GuaniuSearchBar
                     popupWnd = new PopupMainWnd(tbSearch);
                     popupWnd.Show();
                     popupWnd.Left = this.Left;
-                    popupWnd.Top = this.Top - popupWnd.Height;
+                    if (this.Top - popupWnd.Height<0)
+                    {
+                        popupWnd.Top = this.Top + this.Height;
+                    }
+                    else
+                    {
+                        popupWnd.Top = this.Top - popupWnd.Height ;
+                    }
+               
                     popupWnd.TopMost = true;
                     tbSearch.Focus();
                     popupWnd.Deactivate += (_sender, _e) => { popupWnd.Close(); };
@@ -326,7 +385,7 @@ namespace GuaniuSearchBar
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
     
@@ -465,8 +524,9 @@ namespace GuaniuSearchBar
 
         private void 检查更新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UpdateForm upForm = new UpdateForm();
-            upForm.Show();
+            string ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+   
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updatesoftware.exe", this.Handle.ToString()+";"+ver);
                
         }
     }

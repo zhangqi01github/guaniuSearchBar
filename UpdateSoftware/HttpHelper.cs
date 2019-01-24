@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuaniuSearchBar
+namespace UpdateSoftware
 {
     public class HttpHelper
     {

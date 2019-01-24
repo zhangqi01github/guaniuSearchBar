@@ -94,7 +94,7 @@ namespace GuaniuSearchBar
                         {
                         for (int i = 0; i < labelCnt; i++)
                         {
-                            linkLabels[i].Text = hotKeywords[i + startIndex].ToString();
+                            linkLabels[i].Text = " " + hotKeywords[i + startIndex].ToString();
                             linkLabels[i].Tag = "https://www.baidu.com/baidu?word=" + linkLabels[i].Text;
                             }
                         }));

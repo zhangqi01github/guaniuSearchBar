@@ -79,26 +79,26 @@
             this.意见反馈ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 136);
             // 
             // 在桌面显示ToolStripMenuItem
             // 
             this.在桌面显示ToolStripMenuItem.Name = "在桌面显示ToolStripMenuItem";
-            this.在桌面显示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.在桌面显示ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.在桌面显示ToolStripMenuItem.Text = "在桌面显示";
             this.在桌面显示ToolStripMenuItem.Click += new System.EventHandler(this.在桌面显示ToolStripMenuItem_Click);
             // 
             // 基础设置ToolStripMenuItem
             // 
             this.基础设置ToolStripMenuItem.Name = "基础设置ToolStripMenuItem";
-            this.基础设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.基础设置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.基础设置ToolStripMenuItem.Text = "基础设置";
             this.基础设置ToolStripMenuItem.Click += new System.EventHandler(this.基础设置ToolStripMenuItem_Click);
             // 
             // 检查更新ToolStripMenuItem
             // 
             this.检查更新ToolStripMenuItem.Name = "检查更新ToolStripMenuItem";
-            this.检查更新ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.检查更新ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.检查更新ToolStripMenuItem.Text = "检查更新";
             this.检查更新ToolStripMenuItem.Click += new System.EventHandler(this.检查更新ToolStripMenuItem_Click);
             // 
@@ -106,21 +106,21 @@
             // 
             this.在线帮助ToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.在线帮助ToolStripMenuItem.Name = "在线帮助ToolStripMenuItem";
-            this.在线帮助ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.在线帮助ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.在线帮助ToolStripMenuItem.Text = "在线帮助";
             this.在线帮助ToolStripMenuItem.Click += new System.EventHandler(this.在线帮助ToolStripMenuItem_Click);
             // 
             // 意见反馈ToolStripMenuItem
             // 
             this.意见反馈ToolStripMenuItem.Name = "意见反馈ToolStripMenuItem";
-            this.意见反馈ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.意见反馈ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.意见反馈ToolStripMenuItem.Text = "意见反馈";
             this.意见反馈ToolStripMenuItem.Click += new System.EventHandler(this.意见反馈ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
@@ -202,7 +202,9 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
+            this.ShowInTaskbar = false;
             this.Text = "Form1";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
