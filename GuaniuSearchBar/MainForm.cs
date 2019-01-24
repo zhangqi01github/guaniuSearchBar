@@ -63,7 +63,7 @@ namespace GuaniuSearchBar
         PopupKeywordWnd keywordWnd;
         LeftPopupWnd leftPopupWnd;
 
-        #region 接收来自软件更新器的消息以关闭程序
+        #region 接收来自软件更新器的消息以关闭程序  + 热键处理
         const int WM_COPYDATA = 0x004A;
         public struct COPYDATASTRUCT
 
@@ -80,10 +80,32 @@ namespace GuaniuSearchBar
         }
 
 
+
+        private const int WM_HOTKEY = 0x312; //窗口消息-热键
+        private const int WM_CREATE = 0x1; //窗口消息-创建
+        private const int WM_DESTROY = 0x2; //窗口消息-销毁
+        public const int HotKeyID = 0x3572; //热键ID
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
             {
+                case WM_HOTKEY: //窗口消息-热键ID
+                    switch (m.WParam.ToInt32())
+                    {
+                        case HotKeyID: //热键ID
+                            HotKeyPressedHandler();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case WM_CREATE: //窗口消息-创建
+                    
+                    break;
+                case WM_DESTROY: //窗口消息-销毁
+                    AppHotKey.UnRegKey(Handle, HotKeyID); //销毁热键
+                    break;
+
                 case WM_COPYDATA:
                     COPYDATASTRUCT cds = new COPYDATASTRUCT();
 
@@ -487,7 +509,7 @@ namespace GuaniuSearchBar
 
         private void 基础设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BasicSettings bsWnd = new BasicSettings();
+            BasicSettings bsWnd = new BasicSettings(this);
             bsWnd.Show();
         }
 
@@ -528,6 +550,11 @@ namespace GuaniuSearchBar
    
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updatesoftware.exe", this.Handle.ToString()+";"+ver);
                
+        }
+
+        public void HotKeyPressedHandler()
+        {
+            MessageBox.Show("快捷键被调用！");
         }
     }
 }
