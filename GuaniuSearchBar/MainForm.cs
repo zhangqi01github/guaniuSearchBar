@@ -41,7 +41,7 @@ namespace GuaniuSearchBar
         {
             public IntPtr hWnd;
             public string szWindowName;
-            public string szClassName;
+            public string szClassName; 
         }
         enum DisplayMode
         {
@@ -49,7 +49,7 @@ namespace GuaniuSearchBar
             TaskBar
         }
 
-        DisplayMode displayMode= DisplayMode.Desktop;
+        DisplayMode displayMode= DisplayMode.TaskBar;
         // handle of TaskBar
         IntPtr hTaskBar = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "Shell_TrayWnd", null);
         int startButtonWidth;
@@ -99,9 +99,7 @@ namespace GuaniuSearchBar
                             break;
                     }
                     break;
-                case WM_CREATE: //窗口消息-创建
-                    
-                    break;
+
                 case WM_DESTROY: //窗口消息-销毁
                     AppHotKey.UnRegKey(Handle, HotKeyID); //销毁热键
                     break;
@@ -124,11 +122,12 @@ namespace GuaniuSearchBar
 
                 default:
 
-                    base.WndProc(ref m);
+
 
 
                     break;
             }
+            base.WndProc(ref m);
         }
         #endregion
         #region 无边框拖动效果
@@ -187,7 +186,7 @@ namespace GuaniuSearchBar
             {
                 MoveTaskBarButtons(this.Width);
                 SetParent(Handle, hTaskBar);
-                MoveWindow(Handle, startButtonWidth, 2, this.Width, this.Height, true);
+                 MoveWindow(Handle, startButtonWidth, 2, this.Width, this.Height, true);
                
                 在桌面显示ToolStripMenuItem.Text = "在桌面显示";
                 TransparencyKey = Color.Empty;
@@ -328,7 +327,7 @@ namespace GuaniuSearchBar
         }
 
 
-        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        private void tbSearch_MouseClick(object sender, MouseEventArgs e)
         {
             ShowPopupWnd();  
         }
@@ -554,7 +553,9 @@ namespace GuaniuSearchBar
 
         public void HotKeyPressedHandler()
         {
-            MessageBox.Show("快捷键被调用！");
+            this.tbSearch.Focus();
+            ShowPopupWnd();
+        //    MessageBox.Show("快捷键被调用！");
         }
     }
 }
