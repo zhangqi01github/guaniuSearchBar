@@ -43,24 +43,26 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btnSearch = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tbSearch
             // 
             this.tbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbSearch.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbSearch.Location = new System.Drawing.Point(51, 3);
+            this.tbSearch.Location = new System.Drawing.Point(54, 3);
             this.tbSearch.MaxLength = 100;
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(158, 23);
@@ -129,7 +131,7 @@
             this.pbLeftIcon.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pbLeftIcon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbLeftIcon.Image = global::GuaniuSearchBar.Properties.Resources.bd_logo_18x18;
-            this.pbLeftIcon.Location = new System.Drawing.Point(0, 0);
+            this.pbLeftIcon.Location = new System.Drawing.Point(1, 0);
             this.pbLeftIcon.Name = "pbLeftIcon";
             this.pbLeftIcon.Size = new System.Drawing.Size(26, 30);
             this.pbLeftIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -146,7 +148,7 @@
             this.pbArrow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pbArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbArrow.Image = global::GuaniuSearchBar.Properties.Resources.less_btn;
-            this.pbArrow.Location = new System.Drawing.Point(30, 13);
+            this.pbArrow.Location = new System.Drawing.Point(33, 13);
             this.pbArrow.Name = "pbArrow";
             this.pbArrow.Size = new System.Drawing.Size(12, 6);
             this.pbArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -158,9 +160,9 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox4.Location = new System.Drawing.Point(42, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(43, 0);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(171, 30);
+            this.pictureBox4.Size = new System.Drawing.Size(174, 30);
             this.pictureBox4.TabIndex = 5;
             this.pictureBox4.TabStop = false;
             // 
@@ -168,7 +170,7 @@
             // 
             this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSearch.Image = global::GuaniuSearchBar.Properties.Resources.seek_btn;
-            this.btnSearch.Location = new System.Drawing.Point(212, 0);
+            this.btnSearch.Location = new System.Drawing.Point(215, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(35, 30);
             this.btnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -180,7 +182,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Location = new System.Drawing.Point(25, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(26, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(18, 30);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -188,23 +190,31 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbLeft_Click);
             // 
+            // mainPanel
+            // 
+            this.mainPanel.Controls.Add(this.pbLeftIcon);
+            this.mainPanel.Controls.Add(this.pictureBox1);
+            this.mainPanel.Controls.Add(this.btnSearch);
+            this.mainPanel.Controls.Add(this.pbArrow);
+            this.mainPanel.Controls.Add(this.tbSearch);
+            this.mainPanel.Controls.Add(this.pictureBox4);
+            this.mainPanel.Location = new System.Drawing.Point(0, 500);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(247, 32);
+            this.mainPanel.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(248, 31);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.pbArrow);
-            this.Controls.Add(this.pbLeftIcon);
-            this.Controls.Add(this.tbSearch);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox1);
+            this.BackColor = System.Drawing.Color.Green;
+            this.ClientSize = new System.Drawing.Size(346, 1000);
+            this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.Text = "Form1";
-            this.TopMost = true;
+            this.Deactivate += new System.EventHandler(this.MainForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
@@ -214,8 +224,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.mainPanel.ResumeLayout(false);
+            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -234,6 +245,7 @@
         private System.Windows.Forms.ToolStripMenuItem 检查更新ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 在线帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 意见反馈ToolStripMenuItem;
+        private System.Windows.Forms.Panel mainPanel;
     }
 }
 

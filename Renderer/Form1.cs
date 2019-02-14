@@ -5,21 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GuaniuSearchBar
+namespace Renderer
 {
-    public partial class Advices : System.Windows.Forms.Form
+    public partial class Form1 : Form
     {
-        public Advices()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

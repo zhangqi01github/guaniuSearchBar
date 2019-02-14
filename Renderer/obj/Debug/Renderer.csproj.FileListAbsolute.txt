@@ -1,0 +1,10 @@
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.csprojAssemblyReference.cache
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.Properties.Resources.resources
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.csproj.GenerateResource.cache
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.csproj.CoreCompileInputs.cache
+D:\work\guaniuSearchBar\bin\Debug\Renderer.exe
+D:\work\guaniuSearchBar\bin\Debug\Renderer.pdb
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.exe
+D:\work\guaniuSearchBar\Renderer\obj\Debug\Renderer.pdb
+D:\work\guaniuSearchBar\GuaniuSearchBar\bin\Debug\Renderer.exe
+D:\work\guaniuSearchBar\GuaniuSearchBar\bin\Debug\Renderer.pdb

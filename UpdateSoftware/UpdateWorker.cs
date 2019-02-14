@@ -65,6 +65,7 @@ namespace UpdateSoftware
             BackgroundWorker bgWorker = new BackgroundWorker();
             this.mainWndHandle = mainWndHandle;
             bgWorker.DoWork += Back_thread_DoWork;
+            form1.UpdateMsg("正在下载更新包");
             bgWorker.RunWorkerAsync();
         }
 
@@ -78,9 +79,14 @@ namespace UpdateSoftware
                 downclient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(downclient_DownloadProgressChanged);
                 downclient.DownloadFileCompleted += new AsyncCompletedEventHandler(downclient_DownloadFileCompleted);
                 //下载远程更新包down.zip压缩文件|放在应用程序目录下|相应界面事件
-                downclient.DownloadFileAsync(new Uri("http://127.0.0.1:8000/" + "main/download_soft/"), AppDomain.CurrentDomain.BaseDirectory + "\\GuaniuSearchBar._exe");
+                downclient.DownloadFileAsync(new Uri(HttpHelper.baseUrl + "download_soft/"), AppDomain.CurrentDomain.BaseDirectory + "\\GuaniuSearchBar._exe");
+                
             }
-            catch (Exception err) { System.Diagnostics.Debug.WriteLine(err); }
+            catch (Exception err) {
+                System.Diagnostics.Debug.WriteLine(err);
+
+
+            }
         }
 
         private void downclient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -101,10 +107,10 @@ namespace UpdateSoftware
                 }
                 else
                 {
-                  
-            
-                     
-                        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+
+                    form1.UpdateMsg("正在安装");
+                    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
                         var filename = baseDirectory + "GuaniuSearchBar.exe";
                      
                         CloseMainWnd();

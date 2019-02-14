@@ -121,28 +121,31 @@
   <data name="refresh_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\images\refresh_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\images\logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="seek_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\images\seek_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="more_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\images\more_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\images\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="less_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\images\less_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bd_logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\images\bd_logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="sg_logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\images\sg_logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bd_logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\images\bd_logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="more_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\images\more_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\images\logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\images\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_360ss_logo_18x18" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\images\360ss_logo_18x18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\images\close_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

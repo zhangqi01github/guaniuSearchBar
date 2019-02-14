@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,24 +27,41 @@ namespace GuaniuSearchBar
 
         private void BasicSettings_Load(object sender, EventArgs e)
         {
-        
-
-
+            var cfg= Config.ReadHotkeyConfigFromFile();
+       
+                //暂时关闭事件
+                checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
+                comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
+                //设置画面显示
+                checkBox1.Checked = cfg.enabled;
+                comboBox1.SelectedIndex = cfg.hotkeyIndex;
+                //恢复事件
+                checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+                comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            
         }
      
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (checkBox1.Checked)
+            {
+                AppHotKey.UnRegKey(mainForm.Handle);
+                AppHotKey.RegHotKey(mainForm.Handle, comboBox1.SelectedIndex);
+                Config.SaveHotkeyConfig(new Config.HotKeyConfig(comboBox1.SelectedIndex,true));
+            }
 
-            AppHotKey.UnRegKey(mainForm.Handle, MainForm.HotKeyID);
-            if (comboBox1.SelectedIndex==0)
+        }
+
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            AppHotKey.UnRegKey(mainForm.Handle);
+            if (checkBox1.Checked)
             {
-                AppHotKey.RegKey(mainForm.Handle, MainForm.HotKeyID, AppHotKey.KeyModifiers.Ctrl | AppHotKey.KeyModifiers.Alt, Keys.Z);
+                AppHotKey.RegHotKey(mainForm.Handle, comboBox1.SelectedIndex);
             }
-            if (comboBox1.SelectedIndex == 1)
-            {
-                AppHotKey.RegKey(mainForm.Handle, MainForm.HotKeyID, AppHotKey.KeyModifiers.Ctrl | AppHotKey.KeyModifiers.Shift | AppHotKey.KeyModifiers.Alt, Keys.D);
-            }
+            Config.SaveHotkeyConfig(new Config.HotKeyConfig(comboBox1.SelectedIndex,checkBox1.Enabled));
 
         }
     }

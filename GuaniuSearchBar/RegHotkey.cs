@@ -10,6 +10,7 @@ namespace GuaniuSearchBar
 {
     public class AppHotKey
     {
+        public const int HotKeyID = 0x3572; //热键ID
         [DllImport("kernel32.dll")]
         public static extern uint GetLastError();
         //如果函数执行成功，返回值不为0。
@@ -45,7 +46,7 @@ namespace GuaniuSearchBar
         /// <param name="hotKey_id">热键ID</param>
         /// <param name="keyModifiers">组合键</param>
         /// <param name="key">热键</param>
-        public static void RegKey(IntPtr hwnd, int hotKey_id, KeyModifiers keyModifiers, Keys key)
+        private static void RegKey(IntPtr hwnd, int hotKey_id, KeyModifiers keyModifiers, Keys key)
         {
             try
             {
@@ -58,7 +59,8 @@ namespace GuaniuSearchBar
                     }
                 }
             }
-            catch (Exception) {
+            catch (Exception)
+            {
 
             }
         }
@@ -72,6 +74,33 @@ namespace GuaniuSearchBar
             //注销Id号为hotKey_id的热键设定
             UnregisterHotKey(hwnd, hotKey_id);
         }
-    }
+        /// <summary>
+        /// 注销热键
+        /// </summary>
+        /// <param name="hwnd">窗口句柄</param>
+        public static void UnRegKey(IntPtr hwnd)
+        {
+            //注销Id号为hotKey_id的热键设定
+            UnregisterHotKey(hwnd, AppHotKey.HotKeyID);
+        }
 
+
+
+        public static void RegHotKey(IntPtr Handle, int hotkeyIndex)
+        {
+            switch (hotkeyIndex)
+            {
+                case 0://Ctrl + Q
+                    RegKey(Handle, HotKeyID, AppHotKey.KeyModifiers.Ctrl, Keys.Q);
+                    break;
+                case 1:// Alt+Space
+                    RegKey(Handle, HotKeyID, AppHotKey.KeyModifiers.Alt, Keys.Space);
+                    break;
+            }
+        }
+
+
+    }
 }
+
+

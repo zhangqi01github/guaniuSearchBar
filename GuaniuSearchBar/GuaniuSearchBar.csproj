@@ -47,6 +47,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -64,11 +84,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Advices.cs">
+    <Compile Include="Advises.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Advices.Designer.cs">
-      <DependentUpon>Advices.cs</DependentUpon>
+    <Compile Include="Advises.Designer.cs">
+      <DependentUpon>Advises.cs</DependentUpon>
     </Compile>
     <Compile Include="BasicSettings.cs">
       <SubType>Form</SubType>
@@ -76,6 +96,7 @@
     <Compile Include="BasicSettings.Designer.cs">
       <DependentUpon>BasicSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Config.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,8 +127,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegHotkey.cs" />
     <Compile Include="Search.cs" />
-    <EmbeddedResource Include="Advices.resx">
-      <DependentUpon>Advices.cs</DependentUpon>
+    <Compile Include="VERSION.cs" />
+    <EmbeddedResource Include="Advises.resx">
+      <DependentUpon>Advises.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasicSettings.resx">
       <DependentUpon>BasicSettings.cs</DependentUpon>
@@ -181,6 +203,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\images\close_btn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ namespace GuaniuSearchBar
     public class HttpHelper
     {
 
-        public static string baseUrl = "http://127.0.0.1:8000/";
+        public static string baseUrl = "http://113.107.166.85/";
         /// <summary>
         /// GET
         /// </summary>
@@ -39,6 +39,11 @@ namespace GuaniuSearchBar
                 Debug.Print(ex.Message);
             }
             return result;
+        }
+
+        internal static void Goto(string url)
+        {
+            Process.Start(url);
         }
     }
 }

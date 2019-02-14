@@ -19,10 +19,8 @@ namespace GuaniuSearchBar
     public partial class PopupKeywordWnd : System.Windows.Forms.Form
     {
         Label[] linkLabels;
-        PictureBox[] pictureBoxes;
-        Label[] siteNameLabels;
         TextBox tbSearch;
-        int startTopPosition;
+        Thread QProcessThread;
         Form mainForm;
 
 
@@ -31,19 +29,41 @@ namespace GuaniuSearchBar
             InitializeComponent();
             this.tbSearch = tbSearch;
             this.mainForm = mainForm;
-            this.startTopPosition = mainForm.Top;
+
+
+            QProcessThread=new Thread(new ThreadStart(() =>
+            {
+                while (!IsHandleCreated)
+                    Thread.Sleep(100);
+                while (true)
+                {
+                    if (currentTask != null)
+                    {
+                        if (currentTask.Status != TaskStatus.Running)
+                        {
+                            currentTask = null;
+                        }
+                    }
+                    if (taskQ.Count > 0 && currentTask == null)
+                    {
+                        currentTask = taskQ.Dequeue();
+                        currentTask.Start();
+                    }
+                    Thread.Sleep(100);
+                }
+     
+            }));
+            QProcessThread.Start();
         }
 
         private void Form2_Deactivate(object sender, EventArgs e)
         {
-            
-
         }
 
 
         private void Form2_Load(object sender, EventArgs e)
         {
-         
+            
         }
 
         private void Label_MouseLeave(object sender, EventArgs e)
@@ -59,14 +79,19 @@ namespace GuaniuSearchBar
         JToken[] sugguestions = { "1", "2", "3" };
         private void UpdateLinkLabels()
         {
-
-            if (linkLabels!=null)
+            if (sugguestions.Count()==0)
+            {
+                this.Visible = false;
+                return;
+            }
+            if (linkLabels != null)
             {
                 for (int i = 0; i < linkLabels.Length; i++)
                 {
-          
-                    
-                   linkLabels[i].Dispose();
+                    if (linkLabels[i] != null)
+                    {
+                        linkLabels[i].Dispose();
+                    }
                 }
             }
             linkLabels = new Label[sugguestions.Count()];
@@ -85,89 +110,75 @@ namespace GuaniuSearchBar
                 linkLabels[i].Click += (_sender, _e) =>
                 {
                     Label __sender = _sender as Label;
-                   
+
                     ((dynamic)mainForm).CallSearchEngine(__sender.Text);
-                    
+
                 };
 
             }
-
             // update window size
-
-            this.Height = linkLabels.Count() * label1.Height+30;
            
-
-            this.Top = startTopPosition - this.Height;
+            this.Height = linkLabels.Count() * label1.Height + 30;
+            (mainForm as MainForm).AddChildForm(this);
+ 
         }
-    
-
-        private void GetNews()
-        {
-            Action UpdateNews = () =>
-            {
-                try
-                {
-                    string s = HttpHelper.HttpGet("http://127.0.0.1:8000/main/get_dummy_data/");
-                    JArray jsonResult = (JArray)JsonConvert.DeserializeObject(s);
-
-                    for (int i = 0; i < jsonResult.Count; i++)
-                    {
-                        linkLabels[i].Invoke(new MethodInvoker(() =>
-                        {
-                            linkLabels[i].Text = jsonResult[i]["title"].ToString();
-                            linkLabels[i].Tag = jsonResult[i]["url"];
-                        }));
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.Print(e.Message);
-                }
-            };
-
-
-            new Thread(new ThreadStart(UpdateNews)).Start();
-
-        }
+        
 
         private void PopupMainWnd_FormClosing(object sender, FormClosingEventArgs e)
         {
-
         }
-
         // Keyword updated callback.
+        int cnt = 0;
+
+        Queue<Task> taskQ = new Queue<Task>();
+        Task currentTask;
 
         public void KeywordUpdated_Handler()
         {
+            Task tGetKeyword;
             string keyword = tbSearch.Text;
             label1.Text = keyword;
-            // results =keyword.Split(',');
-            var url = "http://suggestion.baidu.com/su?wd=" + keyword+ "&ie=utf-8";
-            var strResultJson = HttpHelper.HttpGet(url);
-            if (strResultJson!=string.Empty)
-            {
-                strResultJson= strResultJson.Remove(strResultJson.Length - 2, 2);
-                strResultJson=strResultJson.Replace("window.baidu.sug(", "");
-            }
-            try
-            {
-                JObject jsonResult = (JObject)JsonConvert.DeserializeObject(strResultJson);
-                sugguestions = jsonResult["s"].ToArray();
-                UpdateLinkLabels();
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-         
-            //for (int i = 0; i < jsonResult; i++)
-            //{
+            tGetKeyword = new Task(
+               () =>
+               {
+                   cnt++;
+                   int _cnt = cnt;
+                   MyDebug.Print(_cnt.ToString() + " 开始");
+                   var url = "http://suggestion.baidu.com/su?wd=" + keyword + "&ie=utf-8";
+                   var strResultJson = HttpHelper.HttpGet(url);
+                   if (strResultJson != string.Empty)
+                   {
+                       strResultJson = strResultJson.Remove(strResultJson.Length - 2, 2);
+                       strResultJson = strResultJson.Replace("window.baidu.sug(", "");
+                   }
+                   try
+                   {
+                       JObject jsonResult = (JObject)JsonConvert.DeserializeObject(strResultJson);
+                       sugguestions = jsonResult["s"].ToArray();
 
-            //}
-            //Debug.Print(keyword);
-            
-            
+                       IAsyncResult asyncResult = this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            UpdateLinkLabels();
+                        }));
+
+                       this.EndInvoke(asyncResult);
+                       MyDebug.Print(_cnt.ToString() + " 结束");
+
+                   }
+                   catch (Exception ex)
+                   {
+                      throw;
+
+                   }
+               });
+            taskQ.Enqueue(tGetKeyword);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

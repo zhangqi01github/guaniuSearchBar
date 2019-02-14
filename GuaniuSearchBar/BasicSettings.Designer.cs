@@ -37,12 +37,13 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(82, 97);
+            this.checkBox1.Location = new System.Drawing.Point(82, 105);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(120, 16);
             this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "快捷键换气工具栏";
+            this.checkBox1.Text = "快捷键唤起工具栏";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // pictureBox1
             // 

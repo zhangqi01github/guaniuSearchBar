@@ -1,6 +1,6 @@
 ﻿namespace GuaniuSearchBar
 {
-    partial class Advices
+    partial class Advises
     {
         /// <summary>
         /// Required designer variable.
@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbProblem = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tbContact = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pbFeedback = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFeedback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,13 +72,13 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "*";
             // 
-            // textBox1
+            // tbProblem
             // 
-            this.textBox1.Location = new System.Drawing.Point(31, 81);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(252, 130);
-            this.textBox1.TabIndex = 3;
+            this.tbProblem.Location = new System.Drawing.Point(31, 81);
+            this.tbProblem.Multiline = true;
+            this.tbProblem.Name = "tbProblem";
+            this.tbProblem.Size = new System.Drawing.Size(252, 130);
+            this.tbProblem.TabIndex = 3;
             // 
             // label4
             // 
@@ -85,49 +89,72 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "联系方式:";
             // 
-            // textBox2
+            // tbContact
             // 
-            this.textBox2.Location = new System.Drawing.Point(32, 285);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(252, 21);
-            this.textBox2.TabIndex = 5;
+            this.tbContact.Location = new System.Drawing.Point(32, 285);
+            this.tbContact.Name = "tbContact";
+            this.tbContact.Size = new System.Drawing.Size(252, 21);
+            this.tbContact.TabIndex = 5;
             // 
-            // pictureBox1
+            // timer1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(102, 331);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(106, 31);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.timer1.Interval = 800;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pbFeedback
+            // 
+            this.pbFeedback.BackColor = System.Drawing.Color.Black;
+            this.pbFeedback.Location = new System.Drawing.Point(23, 200);
+            this.pbFeedback.Name = "pbFeedback";
+            this.pbFeedback.Size = new System.Drawing.Size(266, 31);
+            this.pbFeedback.TabIndex = 8;
+            this.pbFeedback.TabStop = false;
+            this.pbFeedback.Visible = false;
             // 
             // btnClose
             // 
+            this.btnClose.Image = global::GuaniuSearchBar.Properties.Resources.close_btn;
             this.btnClose.Location = new System.Drawing.Point(275, 9);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(25, 22);
+            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btnClose.TabIndex = 7;
             this.btnClose.TabStop = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // Advices
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.DarkGray;
+            this.pictureBox1.Location = new System.Drawing.Point(97, 349);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(106, 31);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // Advises
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(312, 439);
+            this.Controls.Add(this.pbFeedback);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tbContact);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbProblem);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Advices";
+            this.Name = "Advises";
             this.Text = "Advices";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.Advises_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Start_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pbFeedback)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,10 +165,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbProblem;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbContact;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox btnClose;
+        private System.Windows.Forms.PictureBox pbFeedback;
+        private System.Windows.Forms.Timer timer1;
     }
 }
