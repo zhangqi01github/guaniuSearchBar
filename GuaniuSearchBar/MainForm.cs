@@ -88,6 +88,7 @@ namespace GuaniuSearchBar
 
 
 
+        internal bool topMostEnable = true;
 
         DisplayMode displayMode = DisplayMode.Desktop;
         // handle of TaskBar
@@ -124,11 +125,13 @@ namespace GuaniuSearchBar
         private const int WM_HOTKEY = 0x312; //窗口消息-热键
         private const int WM_CREATE = 0x1; //窗口消息-创建
         private const int WM_DESTROY = 0x2; //窗口消息-销毁
+        private const int WM_RBUTTONDOWN = 0x0204;//右键
         const int WM_WINDOWPOSCHANGED = 0x0047;
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
             {
+
                 case WM_HOTKEY: //窗口消息-热键ID
                     switch (m.WParam.ToInt32())
                     {
@@ -199,14 +202,15 @@ namespace GuaniuSearchBar
                 mPoint = new Point(e.X, e.Y);
                 movingWindowFlag = true;
             }
-
         }
         #endregion
         Task topMostTask;
-        bool topMostEnable = true;
+       
         List<Form> popupFormList;
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            this.TransparencyKey = Color.Green;
             //注册热键
             AppHotKey.RegHotKey(Handle, Config.ReadHotkeyConfigFromFile().hotkeyIndex);
             // Move this window to taskbar.
@@ -226,13 +230,14 @@ namespace GuaniuSearchBar
                        {
                            if (displayMode == DisplayMode.TaskBar)
                            {
-                               MoveTaskBarButtons(this.Width);
+                               MoveTaskBarButtons(this.mainPanel.Width);
+                               SetDisplayMode();
                            }
-                            //SetWindowPos(this.Handle, -1, Left, this.Top, this.Width, this.Height, SWP_NOSIZE | SWP_NOREPOSITION | SWP_DEFERERASE | SWP_NOREDRAW);
-
+                 
                             if (topMostEnable)
                            {
                                this.TopMost = true;
+                               //MyDebug.Print("top"+DateTime.Now.ToFileTime());
                            }
                        }
                        ));
@@ -247,27 +252,30 @@ namespace GuaniuSearchBar
         {
             if (displayMode == DisplayMode.TaskBar)
             {
-                MoveTaskBarButtons(this.Width);
-                //var r=SetParent(Handle, hTaskBar);
-                // MoveWindow(Handle, startButtonWidth, 2, this.Width, this.Height, true);
+                MoveTaskBarButtons(this.mainPanel.Width);
                 this.Left = startButtonWidth;
-                DisplayTop = Screen.GetBounds(this).Height - mainPanel.Height;
+                if (Screen.GetBounds(this).Height==Screen.GetWorkingArea(this).Height || Screen.GetWorkingArea(this).Y!=0)//开始菜单不在底部
+                {
+                    displayMode = DisplayMode.Desktop;
+                    在桌面显示ToolStripMenuItem.Text = "在任务栏显示";
+                }
+                else
+                {
+                    DisplayTop = Screen.GetWorkingArea(this).Height;
+                    在桌面显示ToolStripMenuItem.Text = "在桌面显示";
 
-                在桌面显示ToolStripMenuItem.Text = "在桌面显示";
-                TransparencyKey = Color.Black;
-                //TransparencyKey = Color.Empty;
+                }
+
+
+
             }
             else
             {
                 MoveTaskBarButtons(0);
                 SetParent(Handle, IntPtr.Zero);
-                //MoveWindow(Handle, startButtonWidth, 0, this.Width, this.Height, true);
                 在桌面显示ToolStripMenuItem.Text = "在任务栏显示";
-          
-                this.TransparencyKey = Color.Green;
                 MoveWindow(Handle, desktopModeLocation.X, desktopModeLocation.Y, this.Width, this.Height, true);
             }
-
         }
 
         /// <summary>
@@ -387,7 +395,6 @@ namespace GuaniuSearchBar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
         }
 
 
@@ -433,14 +440,9 @@ namespace GuaniuSearchBar
             // If search keyword is empty, show main popup window.
             if (tbSearch.Text == string.Empty)
             {
-                if (keywordWnd != null && keywordWnd.Visible == true)
-                {
-                    keywordWnd.Hide();
-                    
-                }
+                KillChildForms();
                 if (popupWnd == null || popupWnd.Visible == false)
                 {
-                
                     popupWnd = new PopupMainWnd(tbSearch);
                     AddChildForm(popupWnd);
                     tbSearch.Focus();
@@ -464,18 +466,11 @@ namespace GuaniuSearchBar
                     keywordWnd.TopLevel = false;
                     keywordWnd.Parent = this;
                     keywordWnd.Show();
-               
 
                     tbSearch.Focus();
 
                 }
-                if (keywordWnd != null && keywordWnd.Visible == false)
-                {
-                  
-                    //keywordWnd.Visible = true;
-
-                }
-                
+               
                     // call keyword changed event
                     keywordWnd.KeywordUpdated_Handler();
             }
@@ -495,15 +490,12 @@ namespace GuaniuSearchBar
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
-
-
 
         private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
@@ -515,26 +507,24 @@ namespace GuaniuSearchBar
 
         private void pbLeft_Click(object sender, MouseEventArgs e)
         {
-            if (this.Location != oldLocation && displayMode == DisplayMode.Desktop)
-            {
-                return;
-            }
-
+            KillChildForms();
             if (e.Button == MouseButtons.Right)
             {
-                contextMenuStrip1.Show(e.Location.X + Location.X, e.Location.Y + Location.Y);
+                contextMenuStrip1.Show(e.Location.X + Left, e.Location.Y + DisplayTop);
             }
             else if (e.Button == MouseButtons.Left)
             {
                 if (leftPopupWnd == null || leftPopupWnd.Visible == false)
                 {
+                 
                     leftPopupWnd = new LeftPopupWnd(pbLeftIcon);
-
-
-                    //总在最前
                     AddChildForm(leftPopupWnd);
-
                     pbArrow.Image = Properties.Resources.more_btn;
+                }
+                else
+                {
+                    leftPopupWnd.Close();
+                    pbArrow.Image = Properties.Resources.less_btn;
                 }
      
             }
@@ -561,7 +551,6 @@ namespace GuaniuSearchBar
                     Process.Start(url);
                     break;
                 case "搜狗":
-
                     url = "https://www.sogou.com/web?query=a" + keywords;
                     Process.Start(url);
                     break;
@@ -569,7 +558,6 @@ namespace GuaniuSearchBar
                     url = "https://www.so.com/s?q=" + keywords;
                     Process.Start(url);
                     break;
-
             }
         }
 
@@ -608,7 +596,7 @@ namespace GuaniuSearchBar
 
         private void 在线帮助ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpHelper.Goto(HttpHelper.baseUrl);
+            HttpHelper.Goto(HttpHelper.homeURL);
 
         }
 
@@ -620,28 +608,26 @@ namespace GuaniuSearchBar
 
         private void pbLeftIcon_Click(object sender, EventArgs e)
         {
-
         }
 
         private void 检查更新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //string ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             string ver = VERSION.currentVersion;
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "updatesoftware.exe", this.Handle.ToString() + ";" + ver);
-
         }
 
         public void HotKeyPressedHandler()
         {
 
             ShowMainPopupWnd();
+            this.Focus();
             this.tbSearch.Focus();
             //    MessageBox.Show("快捷键被调用！");
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            BringToFront();
+           
         }
         private int DisplayTop
         {
@@ -657,22 +643,63 @@ namespace GuaniuSearchBar
 
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
+            tbHide.Focus();
+            KillChildForms();
+        }
 
-           while(popupFormList.Count>0)
+        private void KillChildForms()
+        {
+            while (popupFormList.Count > 0)
             {
                 if (popupFormList[0] is PopupKeywordWnd)
                 {
                     popupFormList[0].Visible = false;
-                    MyDebug.Print("hide");
-                   
+
                 }
                 else
                 {
                     popupFormList[0].Close();
-                   
+
                 }
 
                 popupFormList.RemoveAt(0);
+            }
+        }
+
+        private void toolStripCut_Click(object sender, EventArgs e)
+        {
+            if (tbSearch.SelectionLength>0)
+            {
+                int sIndex = tbSearch.SelectionStart;
+                Clipboard.SetDataObject(tbSearch.SelectedText);
+                tbSearch.Text = tbSearch.Text.Replace(tbSearch.SelectedText, "");
+                tbSearch.Select(sIndex, 0);
+            }
+         
+        }
+
+        private void toolStripCopy_Click(object sender, EventArgs e)
+        {
+            if (tbSearch.SelectionLength > 0)
+            {
+                Clipboard.SetDataObject(tbSearch.SelectedText);
+            }
+        }
+
+        private void tbSearch_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void toolStripPaste_Click(object sender, EventArgs e)
+        {
+            IDataObject iData = Clipboard.GetDataObject();
+            if (iData.GetDataPresent(DataFormats.Text))
+            {
+                int sIndex=tbSearch.SelectionStart;
+                string pasteStr = (string)iData.GetData(DataFormats.Text);
+                tbSearch.Text=tbSearch.Text.Insert(sIndex, pasteStr);
+                tbSearch.Select(sIndex+pasteStr.Length, 0);
+                
             }
         }
     }

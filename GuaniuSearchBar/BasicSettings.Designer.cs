@@ -59,7 +59,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Ctrl+Q",
-            "Alt+空格"});
+            "Alt+空格",
+            "Ctrl+Alt+Z"});
             this.comboBox1.Location = new System.Drawing.Point(82, 133);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(104, 20);
@@ -78,7 +79,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BasicSettings";
             this.Text = "BasicSettings";
+            this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicSettings_FormClosed);
             this.Load += new System.EventHandler(this.BasicSettings_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Start_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

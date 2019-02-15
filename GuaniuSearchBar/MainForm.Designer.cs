@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tbSearch = new System.Windows.Forms.TextBox();
+            this.contextMenuTextbox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolTripCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.全选ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.在桌面显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.基础设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +49,8 @@
             this.btnSearch = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.tbHide = new System.Windows.Forms.TextBox();
+            this.contextMenuTextbox.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).BeginInit();
@@ -61,15 +68,55 @@
             // tbSearch
             // 
             this.tbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSearch.ContextMenuStrip = this.contextMenuTextbox;
             this.tbSearch.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbSearch.Location = new System.Drawing.Point(54, 3);
             this.tbSearch.MaxLength = 100;
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(158, 23);
-            this.tbSearch.TabIndex = 0;
+            this.tbSearch.TabIndex = 1;
+            this.tbSearch.TabStop = false;
+            this.tbSearch.Click += new System.EventHandler(this.tbSearch_Click);
             this.tbSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbSearch_MouseClick);
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
+            // 
+            // contextMenuTextbox
+            // 
+            this.contextMenuTextbox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolTripCut,
+            this.toolStripMenuCopy,
+            this.toolStripPaste,
+            this.全选ToolStripMenuItem});
+            this.contextMenuTextbox.Name = "contextMenuStrip1";
+            this.contextMenuTextbox.Size = new System.Drawing.Size(181, 114);
+            // 
+            // toolTripCut
+            // 
+            this.toolTripCut.Name = "toolTripCut";
+            this.toolTripCut.Size = new System.Drawing.Size(180, 22);
+            this.toolTripCut.Text = "剪切";
+            this.toolTripCut.Click += new System.EventHandler(this.toolStripCut_Click);
+            // 
+            // toolStripMenuCopy
+            // 
+            this.toolStripMenuCopy.Name = "toolStripMenuCopy";
+            this.toolStripMenuCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuCopy.Text = "复制";
+            this.toolStripMenuCopy.Click += new System.EventHandler(this.toolStripCopy_Click);
+            // 
+            // toolStripPaste
+            // 
+            this.toolStripPaste.Name = "toolStripPaste";
+            this.toolStripPaste.Size = new System.Drawing.Size(180, 22);
+            this.toolStripPaste.Text = "粘贴";
+            this.toolStripPaste.Click += new System.EventHandler(this.toolStripPaste_Click);
+            // 
+            // 全选ToolStripMenuItem
+            // 
+            this.全选ToolStripMenuItem.Name = "全选ToolStripMenuItem";
+            this.全选ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.全选ToolStripMenuItem.Text = "全选";
             // 
             // contextMenuStrip1
             // 
@@ -203,12 +250,24 @@
             this.mainPanel.Size = new System.Drawing.Size(247, 32);
             this.mainPanel.TabIndex = 8;
             // 
+            // tbHide
+            // 
+            this.tbHide.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbHide.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbHide.Location = new System.Drawing.Point(364, 440);
+            this.tbHide.MaxLength = 100;
+            this.tbHide.Name = "tbHide";
+            this.tbHide.Size = new System.Drawing.Size(90, 23);
+            this.tbHide.TabIndex = 9;
+            this.tbHide.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(346, 1000);
+            this.Controls.Add(this.tbHide);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
@@ -218,6 +277,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
+            this.contextMenuTextbox.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).EndInit();
@@ -227,12 +287,12 @@
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pbLeftIcon;
@@ -246,6 +306,13 @@
         private System.Windows.Forms.ToolStripMenuItem 在线帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 意见反馈ToolStripMenuItem;
         private System.Windows.Forms.Panel mainPanel;
+        internal System.Windows.Forms.TextBox tbSearch;
+        internal System.Windows.Forms.TextBox tbHide;
+        private System.Windows.Forms.ContextMenuStrip contextMenuTextbox;
+        private System.Windows.Forms.ToolStripMenuItem toolTripCut;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuCopy;
+        private System.Windows.Forms.ToolStripMenuItem toolStripPaste;
+        private System.Windows.Forms.ToolStripMenuItem 全选ToolStripMenuItem;
     }
 }
 

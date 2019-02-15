@@ -167,5 +167,10 @@ namespace GuaniuSearchBar
         {
             ChangeHotKeywords();
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            HttpHelper.Goto("http://zhuomian.kmshuru.com");
+        }
     }
 }

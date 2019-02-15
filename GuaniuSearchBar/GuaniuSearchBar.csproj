@@ -105,6 +105,12 @@
     </Compile>
     <Compile Include="HttpHelper.cs" />
     <Compile Include="MyDebug.cs" />
+    <Compile Include="NoBorderFormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NoBorderFormBase.Designer.cs">
+      <DependentUpon>NoBorderFormBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="PopupKeywordWnd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NoBorderFormBase.resx">
+      <DependentUpon>NoBorderFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupKeywordWnd.resx">
       <DependentUpon>PopupKeywordWnd.cs</DependentUpon>

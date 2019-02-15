@@ -96,6 +96,9 @@ namespace GuaniuSearchBar
                 case 1:// Alt+Space
                     RegKey(Handle, HotKeyID, AppHotKey.KeyModifiers.Alt, Keys.Space);
                     break;
+                case 2:// Ctrl+Alt+Z
+                    RegKey(Handle, HotKeyID, AppHotKey.KeyModifiers.Alt|KeyModifiers.Ctrl, Keys.Z);
+                    break;
             }
         }
 

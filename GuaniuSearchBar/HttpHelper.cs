@@ -11,7 +11,7 @@ namespace GuaniuSearchBar
 {
     public class HttpHelper
     {
-
+        public static string homeURL = "http://zhuomian.kmshuru.com";
         public static string baseUrl = "http://113.107.166.85/";
         /// <summary>
         /// GET

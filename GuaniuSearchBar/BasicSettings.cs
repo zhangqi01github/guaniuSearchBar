@@ -5,13 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GuaniuSearchBar
 {
-    public partial class BasicSettings : System.Windows.Forms.Form
+    public partial class BasicSettings : NoBorderFormBase
     {
         MainForm mainForm;
         public BasicSettings(MainForm mainForm)
@@ -27,6 +28,7 @@ namespace GuaniuSearchBar
 
         private void BasicSettings_Load(object sender, EventArgs e)
         {
+            mainForm.topMostEnable = false;
             var cfg= Config.ReadHotkeyConfigFromFile();
        
                 //暂时关闭事件
@@ -63,6 +65,11 @@ namespace GuaniuSearchBar
             }
             Config.SaveHotkeyConfig(new Config.HotKeyConfig(comboBox1.SelectedIndex,checkBox1.Enabled));
 
+        }
+
+        private void BasicSettings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainForm.topMostEnable = true;
         }
     }
 }

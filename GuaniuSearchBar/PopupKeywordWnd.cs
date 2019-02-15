@@ -39,8 +39,13 @@ namespace GuaniuSearchBar
                 {
                     if (currentTask != null)
                     {
-                        if (currentTask.Status != TaskStatus.Running)
+                        if (currentTask.ThreadState != System.Threading.ThreadState.Running)
                         {
+                            currentTask = null;
+                        }
+                        if (taskQ.Count >0 && currentTask !=null && currentTask.ThreadState == System.Threading.ThreadState.Running)
+                        {
+                            currentTask.Abort();
                             currentTask = null;
                         }
                     }
@@ -49,7 +54,7 @@ namespace GuaniuSearchBar
                         currentTask = taskQ.Dequeue();
                         currentTask.Start();
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(50);
                 }
      
             }));
@@ -117,9 +122,12 @@ namespace GuaniuSearchBar
 
             }
             // update window size
-           
-            this.Height = linkLabels.Count() * label1.Height + 30;
-            (mainForm as MainForm).AddChildForm(this);
+           if((mainForm as MainForm).tbSearch.Text!="")
+            {
+                this.Height = linkLabels.Count() * label1.Height + 30;
+                (mainForm as MainForm).AddChildForm(this);
+            }
+    
  
         }
         
@@ -130,16 +138,16 @@ namespace GuaniuSearchBar
         // Keyword updated callback.
         int cnt = 0;
 
-        Queue<Task> taskQ = new Queue<Task>();
-        Task currentTask;
+        Queue<Thread> taskQ = new Queue<Thread>();
+        Thread currentTask;
 
         public void KeywordUpdated_Handler()
         {
-            Task tGetKeyword;
+            Thread tGetKeyword;
             string keyword = tbSearch.Text;
             label1.Text = keyword;
 
-            tGetKeyword = new Task(
+            tGetKeyword = new Thread(new ThreadStart(
                () =>
                {
                    cnt++;
@@ -168,10 +176,10 @@ namespace GuaniuSearchBar
                    }
                    catch (Exception ex)
                    {
-                      throw;
+                    
 
                    }
-               });
+               }));
             taskQ.Enqueue(tGetKeyword);
         }
 
