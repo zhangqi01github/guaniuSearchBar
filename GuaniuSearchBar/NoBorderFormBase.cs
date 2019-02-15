@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace GuaniuSearchBar
 {
-    public partial class NoBorderForm : Form
+    public partial class NoBorderFormBase : Form
     {
-        public NoBorderForm()
+        public NoBorderFormBase()
         {
             InitializeComponent();
             this.MouseDown += Start_MouseDown;

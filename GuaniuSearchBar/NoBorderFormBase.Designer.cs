@@ -1,6 +1,6 @@
 ﻿namespace GuaniuSearchBar
 {
-    partial class NoBorderForm
+    partial class NoBorderFormBase
     {
         /// <summary>
         /// Required designer variable.
