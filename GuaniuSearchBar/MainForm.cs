@@ -216,6 +216,7 @@ namespace GuaniuSearchBar
             // Move this window to taskbar.
             SetDisplayMode();
             pbLeftIcon.Tag = "百度";
+            Search.GetIconLinks();
             Search.GetBaiduHotKeywords();
             Search.GetDefaultExplorer();
             popupFormList = new List<Form>();
@@ -395,6 +396,7 @@ namespace GuaniuSearchBar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Search.GetBaiduHotKeywords();
         }
 
 
@@ -514,16 +516,20 @@ namespace GuaniuSearchBar
             }
             else if (e.Button == MouseButtons.Left)
             {
-                if (leftPopupWnd == null || leftPopupWnd.Visible == false)
+                if (leftPopupWnd == null)
                 {
-                 
+ 
+
                     leftPopupWnd = new LeftPopupWnd(pbLeftIcon);
                     AddChildForm(leftPopupWnd);
                     pbArrow.Image = Properties.Resources.more_btn;
                 }
                 else
                 {
-                    leftPopupWnd.Close();
+                    KillChildForms();
+                    leftPopupWnd.Dispose();
+                    leftPopupWnd = null;
+                    //GC.Collect();
                     pbArrow.Image = Properties.Resources.less_btn;
                 }
      
@@ -568,7 +574,7 @@ namespace GuaniuSearchBar
 
         private void 意见反馈ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Advises advices = new Advises();
+            Advises advices = new Advises(this);
 
             advices.Show();
         }
@@ -596,7 +602,7 @@ namespace GuaniuSearchBar
 
         private void 在线帮助ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HttpHelper.Goto(HttpHelper.homeURL);
+            HttpHelper.Goto(HttpHelper.baseUrl);
 
         }
 

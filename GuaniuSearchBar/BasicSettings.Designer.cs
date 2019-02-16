@@ -37,7 +37,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(82, 105);
+            this.checkBox1.Location = new System.Drawing.Point(102, 105);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(120, 16);
             this.checkBox1.TabIndex = 0;
@@ -47,9 +47,11 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::GuaniuSearchBar.Properties.Resources.close_btn;
             this.pictureBox1.Location = new System.Drawing.Point(296, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 31);
+            this.pictureBox1.Size = new System.Drawing.Size(28, 28);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -61,7 +63,7 @@
             "Ctrl+Q",
             "Alt+空格",
             "Ctrl+Alt+Z"});
-            this.comboBox1.Location = new System.Drawing.Point(82, 133);
+            this.comboBox1.Location = new System.Drawing.Point(102, 133);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(104, 20);
             this.comboBox1.TabIndex = 5;
@@ -82,7 +84,6 @@
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicSettings_FormClosed);
             this.Load += new System.EventHandler(this.BasicSettings_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Start_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -43,26 +43,27 @@
             this.在线帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.意见反馈ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.pbLeftIcon = new System.Windows.Forms.PictureBox();
+            this.btnSearch = new System.Windows.Forms.PictureBox();
             this.pbArrow = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.btnSearch = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.mainPanel = new System.Windows.Forms.Panel();
             this.tbHide = new System.Windows.Forms.TextBox();
             this.contextMenuTextbox.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tbSearch
@@ -70,10 +71,10 @@
             this.tbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbSearch.ContextMenuStrip = this.contextMenuTextbox;
             this.tbSearch.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbSearch.Location = new System.Drawing.Point(54, 3);
+            this.tbSearch.Location = new System.Drawing.Point(56, 3);
             this.tbSearch.MaxLength = 100;
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(158, 23);
+            this.tbSearch.Size = new System.Drawing.Size(215, 23);
             this.tbSearch.TabIndex = 1;
             this.tbSearch.TabStop = false;
             this.tbSearch.Click += new System.EventHandler(this.tbSearch_Click);
@@ -89,33 +90,33 @@
             this.toolStripPaste,
             this.全选ToolStripMenuItem});
             this.contextMenuTextbox.Name = "contextMenuStrip1";
-            this.contextMenuTextbox.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuTextbox.Size = new System.Drawing.Size(101, 92);
             // 
             // toolTripCut
             // 
             this.toolTripCut.Name = "toolTripCut";
-            this.toolTripCut.Size = new System.Drawing.Size(180, 22);
+            this.toolTripCut.Size = new System.Drawing.Size(100, 22);
             this.toolTripCut.Text = "剪切";
             this.toolTripCut.Click += new System.EventHandler(this.toolStripCut_Click);
             // 
             // toolStripMenuCopy
             // 
             this.toolStripMenuCopy.Name = "toolStripMenuCopy";
-            this.toolStripMenuCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuCopy.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuCopy.Text = "复制";
             this.toolStripMenuCopy.Click += new System.EventHandler(this.toolStripCopy_Click);
             // 
             // toolStripPaste
             // 
             this.toolStripPaste.Name = "toolStripPaste";
-            this.toolStripPaste.Size = new System.Drawing.Size(180, 22);
+            this.toolStripPaste.Size = new System.Drawing.Size(100, 22);
             this.toolStripPaste.Text = "粘贴";
             this.toolStripPaste.Click += new System.EventHandler(this.toolStripPaste_Click);
             // 
             // 全选ToolStripMenuItem
             // 
             this.全选ToolStripMenuItem.Name = "全选ToolStripMenuItem";
-            this.全选ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.全选ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.全选ToolStripMenuItem.Text = "全选";
             // 
             // contextMenuStrip1
@@ -173,6 +174,19 @@
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
+            // mainPanel
+            // 
+            this.mainPanel.Controls.Add(this.pbLeftIcon);
+            this.mainPanel.Controls.Add(this.btnSearch);
+            this.mainPanel.Controls.Add(this.pbArrow);
+            this.mainPanel.Controls.Add(this.tbSearch);
+            this.mainPanel.Controls.Add(this.pictureBox4);
+            this.mainPanel.Controls.Add(this.pictureBox1);
+            this.mainPanel.Location = new System.Drawing.Point(-2, 500);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(312, 32);
+            this.mainPanel.TabIndex = 8;
+            // 
             // pbLeftIcon
             // 
             this.pbLeftIcon.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -189,6 +203,18 @@
             this.pbLeftIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbLeft_MouseDown);
             this.pbLeftIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbLeftIcon_MouseMove);
             this.pbLeftIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbLeftIcon_MouseUp);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSearch.Image = global::GuaniuSearchBar.Properties.Resources.seek_btn;
+            this.btnSearch.Location = new System.Drawing.Point(277, 0);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(35, 30);
+            this.btnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.TabStop = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // pbArrow
             // 
@@ -209,21 +235,9 @@
             this.pictureBox4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pictureBox4.Location = new System.Drawing.Point(43, 0);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(174, 30);
+            this.pictureBox4.Size = new System.Drawing.Size(248, 30);
             this.pictureBox4.TabIndex = 5;
             this.pictureBox4.TabStop = false;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSearch.Image = global::GuaniuSearchBar.Properties.Resources.seek_btn;
-            this.btnSearch.Location = new System.Drawing.Point(215, 0);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(35, 30);
-            this.btnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.TabStop = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // pictureBox1
             // 
@@ -237,24 +251,11 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbLeft_Click);
             // 
-            // mainPanel
-            // 
-            this.mainPanel.Controls.Add(this.pbLeftIcon);
-            this.mainPanel.Controls.Add(this.pictureBox1);
-            this.mainPanel.Controls.Add(this.btnSearch);
-            this.mainPanel.Controls.Add(this.pbArrow);
-            this.mainPanel.Controls.Add(this.tbSearch);
-            this.mainPanel.Controls.Add(this.pictureBox4);
-            this.mainPanel.Location = new System.Drawing.Point(0, 500);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(247, 32);
-            this.mainPanel.TabIndex = 8;
-            // 
             // tbHide
             // 
             this.tbHide.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbHide.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbHide.Location = new System.Drawing.Point(364, 440);
+            this.tbHide.Location = new System.Drawing.Point(388, 440);
             this.tbHide.MaxLength = 100;
             this.tbHide.Name = "tbHide";
             this.tbHide.Size = new System.Drawing.Size(90, 23);
@@ -266,7 +267,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(346, 1000);
+            this.ClientSize = new System.Drawing.Size(310, 1000);
             this.Controls.Add(this.tbHide);
             this.Controls.Add(this.mainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -279,13 +280,13 @@
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.contextMenuTextbox.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeftIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

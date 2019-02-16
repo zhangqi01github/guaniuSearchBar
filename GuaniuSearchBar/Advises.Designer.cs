@@ -39,6 +39,7 @@
             this.pbFeedback = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbFeedback)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -132,12 +133,24 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // lblWarning
+            // 
+            this.lblWarning.AutoSize = true;
+            this.lblWarning.ForeColor = System.Drawing.Color.Red;
+            this.lblWarning.Location = new System.Drawing.Point(91, 61);
+            this.lblWarning.Name = "lblWarning";
+            this.lblWarning.Size = new System.Drawing.Size(113, 12);
+            this.lblWarning.TabIndex = 9;
+            this.lblWarning.Text = "（请输入问题描述）";
+            this.lblWarning.Visible = false;
+            // 
             // Advises
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(312, 439);
+            this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.pbFeedback);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pictureBox1);
@@ -150,8 +163,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Advises";
             this.Text = "Advices";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Advises_FormClosed);
             this.Load += new System.EventHandler(this.Advises_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Start_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbFeedback)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -172,5 +185,6 @@
         private System.Windows.Forms.PictureBox btnClose;
         private System.Windows.Forms.PictureBox pbFeedback;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblWarning;
     }
 }

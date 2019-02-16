@@ -12,7 +12,7 @@ namespace UpdateSoftware
     public class HttpHelper
     {
 
-        public static string baseUrl = "http://113.107.166.85/";
+        public static string baseUrl = "http://zhuomian.kmshuru.com/";
         /// <summary>
         /// GET
         /// </summary>

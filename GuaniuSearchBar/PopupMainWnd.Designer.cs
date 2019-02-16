@@ -54,11 +54,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 81);
+            this.label2.Location = new System.Drawing.Point(5, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "百度";
+            this.label2.Text = "四个字符";
             this.label2.Visible = false;
             // 
             // label3
@@ -151,10 +151,7 @@
             this.Name = "PopupMainWnd";
             this.ShowInTaskbar = false;
             this.Text = "Form2";
-            this.Deactivate += new System.EventHandler(this.Form2_Deactivate);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PopupMainWnd_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
-            this.Enter += new System.EventHandler(this.Form2_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

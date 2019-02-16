@@ -28,25 +28,9 @@ namespace GuaniuSearchBar
             this.tbSearch = tbSearch;
         }
 
-        private void Form2_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Deactivate(object sender, EventArgs e)
-        {
-
-
-        }
-
-        string[] sitenames = { "百度", "淘宝", "天猫", "hao123", "test", "百度", "淘宝", "天猫", "hao123", "test", };
+      
         // Define paddings here.
-        const int pictureBoxPadding = 17;
+        const int pictureBoxPadding = 20;
         private void Form2_Load(object sender, EventArgs e)
         {
             linkLabels = new Label[10];
@@ -56,7 +40,7 @@ namespace GuaniuSearchBar
                 linkLabels[i].Left = 0;
                 linkLabels[i].Size = label1.Size;
                 linkLabels[i].Top = label1.Top + i * label1.Height;
-                linkLabels[i].Text =string.Empty;
+                linkLabels[i].Text = string.Empty;
                 linkLabels[i].TextAlign = ContentAlignment.MiddleLeft;
                 linkLabels[i].MouseEnter += Label_MouseEnter;
                 linkLabels[i].MouseLeave += Label_MouseLeave;
@@ -68,13 +52,18 @@ namespace GuaniuSearchBar
                     Label __sender = _sender as Label;
                     if (__sender.Tag != null)
                     {
-                        Process.Start( __sender.Tag.ToString() );
+                        Process.Start(__sender.Tag.ToString());
                     }
                 };
-
             }
-
-
+            UpdateLinkIcons();
+            Search.GetBaiduHotKeywords(linkLabels);
+        }
+        /// <summary>
+        /// 更新上方的十个图标
+        /// </summary>
+        private void UpdateLinkIcons()
+        {
             pictureBoxes = new PictureBox[10];
             siteNameLabels = new Label[10];
             for (int i = 0; i < 10; i++)
@@ -95,32 +84,35 @@ namespace GuaniuSearchBar
                 {
                     pictureBoxes[i].Image = Image.FromFile(ImgSrc);
                 }
-
+                pictureBoxes[i].Tag = Search.urls[i];
+                pictureBoxes [i].Click+= (_s, _e) =>
+                {
+                    HttpHelper.Goto((_s as PictureBox).Tag.ToString());
+                };
                 this.Controls.Add(pictureBoxes[i]);
 
                 // News labels
                 siteNameLabels[i] = new Label();
-                siteNameLabels[i].Text = sitenames[i];
-
-                siteNameLabels[i].Size = label2.Size;
+                siteNameLabels[i].Text = Search.sitenames[i];
+                siteNameLabels[i].AutoSize=true;
                 siteNameLabels[i].Top = pictureBoxes[i].Top + pictureBoxes[i].Height + 5;
                 siteNameLabels[i].Cursor = Cursors.Hand;
-                siteNameLabels[i].Tag = i;
-                this.Controls.Add(siteNameLabels[i]);
-
-                // Left align to PictureBox.
-                siteNameLabels[i].Paint += (_sender, _e) =>
+                siteNameLabels[i].Tag =Search.urls[i];
+                siteNameLabels[i].Click += (_s, _e) =>
                 {
-                    int _i = (int)(_sender as Label).Tag;
-                    siteNameLabels[_i].Left = pictureBoxes[_i].Left + (pictureBoxes[_i].Width - siteNameLabels[_i].Width) / 2;
+                    HttpHelper.Goto((_s as Label).Tag.ToString());
                 };
-
+              
+                this.Controls.Add(siteNameLabels[i]);
+                siteNameLabels[i].Left = pictureBoxes[i].Left - (siteNameLabels[i].Width - pictureBoxes[i].Width) / 2;
+                //// Left align to PictureBox.
+                //siteNameLabels[i].Paint += (_sender, _e) =>
+                //{
+                //    int _i = (int)(_sender as Label).Tag;
+                //    siteNameLabels[_i].Left = pictureBoxes[_i].Left + (pictureBoxes[_i].Width - siteNameLabels[_i].Width) / 2;
+                //};
 
             }
-
-
-            Search.GetBaiduHotKeywords(linkLabels);
-     
         }
 
         private void Label_MouseLeave(object sender, EventArgs e)
@@ -132,31 +124,10 @@ namespace GuaniuSearchBar
         {
             ((Label)sender).BackColor = Color.Gray;
         }
-
-
-    
-
-   
-
-        private void PopupMainWnd_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (!tbSearch.Focused && !this.Focused)
-            {
-
-                Close();
-
-            }
-        }
-
+        
         private void ChangeHotKeywords()
         {
-
-            Search.GetBaiduHotKeywords(linkLabels,true);
+            Search.GetBaiduHotKeywords(linkLabels, true);
         }
         private void label4_Click(object sender, EventArgs e)
         {
